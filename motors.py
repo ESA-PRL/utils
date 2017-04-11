@@ -73,7 +73,6 @@ for reading in readings:
 plt.title(filename)
 plt.ylabel(plot_channel)
 plt.xlabel("Time")
-plt.plot(x, y)
+plt.plot(x, y, marker='o')
 plt.legend(plot_outputs)
 plt.show()
-

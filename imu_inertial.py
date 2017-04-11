@@ -32,7 +32,7 @@ readings = []
 with open(filename) as f:
     for line in f:
         # Regular expression for the parser
-        regex = re.match('^(\d+)\s([-\d\.]+)\s([-\d\.]+)\s([-\d\.]+)\s([-\d\.]+)\s([-\d\.]+)\s([-\d\.]+)\s([-\d\.]+)\s([-\d\.]+)\s([-\d\.]+)', line, re.IGNORECASE)
+        regex = re.match('^(\d+)\s([-\d\.e]+)\s([-\d\.e]+)\s([-\d\.e]+)\s([-\d\.e]+)\s([-\d\.e]+)\s([-\d\.e]+)\s([-\d\.e]+)\s([-\d\.e]+)\s([-\d\.e]+)', line, re.IGNORECASE)
         if regex:
             values = []
             for m in regex.groups():
@@ -58,7 +58,7 @@ for reading in readings:
 plt.title(filename)
 plt.ylabel("Value")
 plt.xlabel("Time")
-plt.plot(x, y)
+plt.plot(x, y, marker='o')
 plt.legend(plot_outputs)
 plt.show()
 
