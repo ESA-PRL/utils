@@ -49,7 +49,7 @@ y = []
 plot_outputs = [plot_channels]
 
 for reading in readings:
-    x.append(datetime.datetime.fromtimestamp(int(reading["timestamp"]) / 1000000))
+    x.append(datetime.datetime.fromtimestamp(int(reading["timestamp"]) / 1000000.0))
     outputs = []
     for output in plot_outputs:
         outputs.append(reading[output])
