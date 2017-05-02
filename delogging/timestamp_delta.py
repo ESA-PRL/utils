@@ -13,10 +13,7 @@ else:
     script, filename = argv
     plot_channel = "t"
 
-fields = [
-        "timestamp"
-        ]
-
+fields = [ "timestamp" ]
 readings = []
 
 # Parse the file
@@ -37,14 +34,12 @@ plot_outputs = ["timestamp_delta"]
 for i in range(1,len(readings)):
     x.append(datetime.datetime.fromtimestamp(float(int(readings[i]["timestamp"]) / 1000000.0)))
     y.append(int(readings[i]["timestamp"]) - int(readings[i-1]["timestamp"]) )
-    #x.append(int(readings[i]["timestamp"]))
 
 print(np.mean(y))
 
 plt.title(filename)
-plt.ylabel("Timestamp Delta")
-plt.xlabel("Time")
+plt.ylabel("Timestamp Delta [usecs]")
+plt.xlabel("Time [date]")
 plt.plot(x, y, marker='o')
-#plt.plot(x, marker='o')
 plt.legend(plot_outputs)
 plt.show()
