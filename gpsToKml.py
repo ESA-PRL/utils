@@ -1,7 +1,7 @@
 # Script to convert recorded GPS coordinates to KML path.
 #
 # Get the gps coordinates of your logged run via
-# pocolog waypoint_navigation.log -s /gps.raw_data --fields latitude,longitude,altitude > gps_data
+# pocolog waypoint_navigation.log -s /gps.raw_data --fields longitude,latitude,altitude > gps_data
 # and find that data file, when this script's dialog asks for it
 __author__ = "Levin Gerdes"
 
@@ -51,10 +51,8 @@ f = open(file_path, 'r')
 lines = f.readlines()[2:] # ignore the two header lines
 f.close()
 
-# split into longitude, latitude, altitude
-coordinates = [l.split() for l in lines]
-# swap longitude with latitude and indent
-coordinates = ["          "+crds[1]+","+crds[0]+","+crds[2]+"\n" for crds in coordinates]
+# replace spaces by commas and indent
+coordinates = ["          "+l.replace(" ",",") for l in lines]
 coordinates = ''.join(coordinates)
 
 # save results
