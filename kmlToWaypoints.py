@@ -7,7 +7,7 @@
 # KML PARSER
 # https://pythonhosted.org/pykml/installation.html
 # check that lxml is installed (>>> import lxml )
-# install pip (sudo apt-get install pip)
+# install pip (sudo apt-get install python-pip)
 # install pykml (sudo pip install pykml)
 from pykml import parser
 
