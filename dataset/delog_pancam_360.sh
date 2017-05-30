@@ -7,7 +7,21 @@ if [[ $# -eq 0 ]] ; then
     exit 1
 fi
 
-echo "Delogging the deinterlaced BB3 left and right camera pictures to bb3_left and bb3_right folders"
+pancam_360_pan="pancam_360_pan.txt"
+pancam_360_tilt="pancam_360_tilt.txt"
+pancam_360_set="pancam_360_set.txt"
+
+echo "Delogging the pancam 360 pictures to pancam_360_left and pancam_360_right folders and pan/tilt angles and number of the set to pancam_360_angles"
+
+mkdir -p pancam_360_angles
+cd pancam_360_angles
+echo "Extracting pancam pan angles"
+pocolog "$1" -s /pancam_360.pan_angle_out_degrees -t > $pancam_360_pan
+echo "Extracting pancam tilt angles"
+pocolog "$1" -s /pancam_360.tilt_angle_out_degrees -t > $pancam_360_tilt
+echo "Extracting pancam set identification numbers"
+pocolog "$1" -s /pancam_360.set_id -t > $pancam_360_set
+cd ..
 
 # Make directory if it does not exist yet
 mkdir -p pancam_360_left
