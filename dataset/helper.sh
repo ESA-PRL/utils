@@ -15,3 +15,4 @@ function renameFilesUnix {
         mv $f "$adate.png"
     done
 }
+

@@ -16,8 +16,15 @@ mkdir -p pancam_panorama_angles
 cd pancam_panorama_angles
 echo "Extracting pancam pan angles"
 pocolog "$1" -s /pancam_panorama.pan_angle_out_degrees -t > $pancam_panorama_pan
-echo "Extracting pancam tilt angles"
+tail -n +3 $pancam_panorama_pan > "temp.txt"
+echo "Timestamp panAngleDegrees" | cat - "temp.txt" > temp2.txt && mv temp2.txt "temp.txt"
+mv "temp.txt" $pancam_panorama_pan
+
+echo "Extracting pancam tilt angles, beware that the tilt angle has a multiplication factor or 4, so the real angle is 1/4th the value"
 pocolog "$1" -s /pancam_panorama.tilt_angle_out_degrees -t > $pancam_panorama_tilt
+tail -n +3 $pancam_panorama_tilt > "temp.txt"
+echo "Timestamp tiltAngleDegrees" | cat - "temp.txt" > temp2.txt && mv temp2.txt "temp.txt"
+mv "temp.txt" $pancam_panorama_tilt
 cd ..
 
 mkdir -p pancam_panorama_left

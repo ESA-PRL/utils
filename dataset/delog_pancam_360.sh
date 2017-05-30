@@ -17,10 +17,21 @@ mkdir -p pancam_360_angles
 cd pancam_360_angles
 echo "Extracting pancam pan angles"
 pocolog "$1" -s /pancam_360.pan_angle_out_degrees -t > $pancam_360_pan
+tail -n +3 $pancam_360_pan > "temp.txt"
+echo "Timestamp panAngleDegrees" | cat - "temp.txt" > temp2.txt && mv temp2.txt "temp.txt"
+mv "temp.txt" $pancam_360_pan
+
 echo "Extracting pancam tilt angles"
 pocolog "$1" -s /pancam_360.tilt_angle_out_degrees -t > $pancam_360_tilt
+tail -n +3 $pancam_360_tilt > "temp.txt"
+echo "Timestamp tiltAngleDegrees" | cat - "temp.txt" > temp2.txt && mv temp2.txt "temp.txt"
+mv "temp.txt" $pancam_360_tilt
+
 echo "Extracting pancam set identification numbers"
 pocolog "$1" -s /pancam_360.set_id -t > $pancam_360_set
+tail -n +3 $pancam_360_set > "temp.txt"
+echo "Timestamp setID" | cat - "temp.txt" > temp2.txt && mv temp2.txt "temp.txt"
+mv "temp.txt" $pancam_360_set
 cd ..
 
 # Make directory if it does not exist yet
