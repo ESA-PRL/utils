@@ -11,13 +11,15 @@ Bundles.initialize
 
 # This ruby scripts takes the interlaced bb3 frame and saves three deinterlaced triplets in a new logfile
 
+print "Call 'bundle-sel hdpr' if an error saying something about camera configuration occurs"
+
 Orocos.run 'camera_bb3::Task' => 'camera_bb3' do
     
     # Declare logger of new ports
     logger_bb3 = Orocos.name_service.get 'camera_bb3_Logger'
     
     # New log destination
-    logger_bb3.file = "bb3_deinterlaced.log"
+    logger_bb3.file = ARGV[0] + "/bb3_deinterlaced.log"
     
     # New components to run on top of the log
     camera_bb3 = Orocos.name_service.get 'camera_bb3'
@@ -27,7 +29,7 @@ Orocos.run 'camera_bb3::Task' => 'camera_bb3' do
     if ARGV.size == 0 then
 		log_replay = Orocos::Log::Replay.open("bb3.log")
     else
-		log_replay = Orocos::Log::Replay.open(ARGV[0] + "bb3.log")
+		log_replay = Orocos::Log::Replay.open(ARGV[0] + "/bb3.log")
     end
     
     # Uses timestamp when data was acquired

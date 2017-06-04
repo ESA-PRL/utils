@@ -11,13 +11,15 @@ Bundles.initialize
 
 # This ruby scripts takes the interlaced bb2 frame and saves the deinterlaced pairs in a new log file
 
+print "Call 'bundle-sel hdpr' if an error saying something about camera configuration occurs\n"
+
 Orocos.run 'camera_bb2::Task' => 'camera_bb2' do
     
     # Declare logger of new ports
     logger_bb2 = Orocos.name_service.get 'camera_bb2_Logger'
     
     # New log destination
-    logger_bb2.file = "bb2_deinterlaced.log"
+    logger_bb2.file = ARGV[0] + "/bb2_deinterlaced.log"
     
     # New components to run on top of the log
     camera_bb2 = Orocos.name_service.get 'camera_bb2'
@@ -27,7 +29,7 @@ Orocos.run 'camera_bb2::Task' => 'camera_bb2' do
     if ARGV.size == 0 then
 		log_replay = Orocos::Log::Replay.open("bb2.log")
     else
-		log_replay = Orocos::Log::Replay.open(ARGV[0] + "bb2.log")
+		log_replay = Orocos::Log::Replay.open(ARGV[0] + "/bb2.log")
     end
     
     # Uses timestamp when data was acquired
@@ -61,6 +63,6 @@ Orocos.run 'camera_bb2::Task' => 'camera_bb2' do
 		end
     end
     
-    print 'The error in the end is normal'
+    print 'The error in the end is normal\n'
 end
 
