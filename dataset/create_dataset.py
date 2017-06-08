@@ -12,6 +12,7 @@ from datetime import datetime
 import time
 import threading
 
+# Class that accepts parameters for functions to be run in threads
 class DelogThread(threading.Thread):
     def __init__(self, target, *args):
         self._target = target
@@ -405,6 +406,7 @@ def delogAll(input_path, output_path):
     t17 = DelogThread(delogCamera, input_path + "/lidar.log", output_path + "/Velodyne", "/velodyne_lidar.range_frame", "Velodyne_#TIME_range")
     t17.start()
 
+    # Deinterlace the BB2 and BB3 cameras before exporting the images
     tbb2 = DelogThread(runRubyScript, "deinterlace_bb2.rb", input_path)
     tbb2.start()
 
@@ -463,15 +465,6 @@ def delogAll(input_path, output_path):
     t20.join()
     t21.join()
     t22.join()
-
-    """delogPanCamPTU(input_path + "/pancam.log", output_path + "/ptu-panorama.txt", "/pancam_panorama.pan_angle_out_degrees", "/pancam_panorama.tilt_angle_out_degrees")
-    delogPanCamPTU(input_path + "/pancam.log", output_path + "/ptu-360.txt", "/pancam_360.pan_angle_out_degrees", "/pancam_360.tilt_angle_out_degrees")
-    delogGPS(input_path + "/waypoint_navigation.log", output_path + "/gps.txt")
-    delogIMU(input_path + "/imu.log", output_path + "/imu.txt")
-    delogIMUTemperatures(input_path + "/imu.log", output_path + "/imu_temperature.txt")
-    delogOdometry(input_path + "/control.log", output_path + "/odometry.txt")
-    delogGyro(input_path + "/gyro.log", output_path + "/gyro.txt")
-    delogGyroTemperatures(input_path + "/gyro.log", output_path + "/gyro_temperature.txt")"""
 
     showTime("All", start_time)
 
