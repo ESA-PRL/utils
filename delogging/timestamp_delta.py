@@ -7,11 +7,26 @@ import re
 from sys import argv
 import datetime
 
-if len(argv) == 3:
-    script, filename, plot_channel = argv
-else:
+usage = """
+
+This script plots the time difference between the current and the previous sample's timestamp
+and prints the mean of these delta values to the terminal.
+
+To extract the timestamps you want to plot, e.g. for the imu timestamps, invoke
+
+    pocolog imu.log -s /imu_stim300.orientation_samples_out --fields time > timestamps.txt
+
+and plot the timestamp delta via
+
+    python timestamp_delta.py timestamps.txt
+
+"""
+
+if len(argv) == 2:
     script, filename = argv
-    plot_channel = "t"
+else:
+    print(usage)
+    exit()
 
 fields = [ "timestamp" ]
 readings = []
