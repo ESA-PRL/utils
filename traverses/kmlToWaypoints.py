@@ -23,8 +23,10 @@ import utm
 
 
 # ORIGIN [utm easting/northing]
-originX = 597481.68
-originY = 5785983.94
+#originX = 597481.68
+#originY = 5785983.94
+originX = 344043.0
+originY = 3127403.0
 
 
 # get path to kml file
@@ -57,3 +59,5 @@ for coord in coords[:-1]: # the last entry in coords is ''
 print("selectedWaypoints: " + str( range(len(xpos)+1)[1:] ) )
 print("xpos: "+ str(xpos))
 print("ypos: "+ str(ypos))
+
+print("Add this to waypoint_navigation::TrajectoryTest.yml")
