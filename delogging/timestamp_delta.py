@@ -46,11 +46,19 @@ y = []
 
 plot_outputs = ["timestamp_delta"]
 
+timestamp_start = float(int(readings[0]["timestamp"]) / 1000000.0)
+timestamp_end = float(int(readings[len(readings) - 1]["timestamp"]) / 1000000.0)
+
+time_start = datetime.datetime.fromtimestamp(timestamp_start).strftime("%H:%M:%S")
+time_end = datetime.datetime.fromtimestamp(timestamp_end).strftime("%H:%M:%S")
+
+frequency = len(readings) / (timestamp_end - timestamp_start)
+
+print "Name: %s, log start: %s, log end: %s, frequency: %.3f" % (filename, time_start, time_end, frequency)
+
 for i in range(1,len(readings)):
     x.append(datetime.datetime.fromtimestamp(float(int(readings[i]["timestamp"]) / 1000000.0)))
     y.append(int(readings[i]["timestamp"]) - int(readings[i-1]["timestamp"]) )
-
-print(np.mean(y))
 
 plt.title(filename)
 plt.ylabel("Timestamp Delta [usecs]")
