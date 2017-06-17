@@ -46,9 +46,9 @@ y = []
 
 #plot_outputs = ["latitude", "longitude"]
 #plot_outputs = ["satellites"]
-plot_outputs = [plot_channels]
+#plot_outputs = [plot_channels]
 
-for reading in readings:
+"""for reading in readings:
     x.append(datetime.datetime.fromtimestamp(int(reading["timestamp"]) / 1000000.0))
     outputs = []
     for output in plot_outputs:
@@ -59,12 +59,13 @@ plt.title(filename)
 plt.ylabel("Value")
 plt.xlabel("Time")
 plt.plot(x, y)
-plt.legend(plot_outputs)
+plt.legend(plot_outputs)"""
 
 x = []
 y = []
 
 for reading in readings:
+    #print reading["latitude"], reading["longitude"]
     x.append(reading["latitude"])
     y.append(reading["longitude"])
 
