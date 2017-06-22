@@ -19,7 +19,7 @@ Orocos.run 'camera_bb3::Task' => 'camera_bb3' do
     logger_bb3 = Orocos.name_service.get 'camera_bb3_Logger'
     
     # New log destination
-    logger_bb3.file = ARGV[0] + "/bb3_deinterlaced.log"
+    logger_bb3.file = ARGV[1] + "/bb3_deinterlaced.log"
     
     # New components to run on top of the log
     camera_bb3 = Orocos.name_service.get 'camera_bb3'

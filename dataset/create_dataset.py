@@ -44,8 +44,8 @@ def showTime(item, start_time):
     elapsed_time = time.time() - start_time
     print "%s delog finished in %s seconds" % (item, elapsed_time)
 
-def runRubyScript(script_name, log_folder):
-    subprocess.call(["ruby", script_name, log_folder])
+def runRubyScript(script_name, log_folder, output_folder):
+    subprocess.call(["ruby", script_name, log_folder, output_folder])
 
 def delogPanCamPTU(file_input, file_output, stream_pan, stream_tilt):
     print "Delogging PTU angles from %s to %s" % (file_input, file_output)
@@ -407,10 +407,10 @@ def delogAll(input_path, output_path):
     t17.start()
 
     # Deinterlace the BB2 and BB3 cameras before exporting the images
-    tbb2 = DelogThread(runRubyScript, "deinterlace_bb2.rb", input_path)
+    tbb2 = DelogThread(runRubyScript, "deinterlace_bb2.rb", input_path, output_path)
     tbb2.start()
 
-    tbb3 = DelogThread(runRubyScript, "deinterlace_bb3.rb", input_path)
+    tbb3 = DelogThread(runRubyScript, "deinterlace_bb3.rb", input_path, output_path)
     tbb3.start()
 
     t1.join()
@@ -441,23 +441,23 @@ def delogAll(input_path, output_path):
 
     # BB2 delogging
 
-    t18 = DelogThread(delogCamera, input_path + "/bb2_deinterlaced.log", output_path + "/HazCam", "/camera_bb2.left_frame", "HazCam_#TIME_L")
+    t18 = DelogThread(delogCamera, output_path + "/bb2_deinterlaced.log", output_path + "/HazCam", "/camera_bb2.left_frame", "HazCam_#TIME_L")
     t18.start()
 
-    t19 = DelogThread(delogCamera, input_path + "/bb2_deinterlaced.log", output_path + "/HazCam", "/camera_bb2.right_frame", "HazCam_#TIME_R")
+    t19 = DelogThread(delogCamera, output_path + "/bb2_deinterlaced.log", output_path + "/HazCam", "/camera_bb2.right_frame", "HazCam_#TIME_R")
     t19.start()
 
     tbb3.join()
 
     # BB3 delogging
 
-    t20 = DelogThread(delogCamera, input_path + "/bb3_deinterlaced.log", output_path + "/LocCam", "/camera_bb3.left_frame", "LocCam_#TIME_L")
+    t20 = DelogThread(delogCamera, output_path + "/bb3_deinterlaced.log", output_path + "/LocCam", "/camera_bb3.left_frame", "LocCam_#TIME_L")
     t20.start()
 
-    t21 = DelogThread(delogCamera, input_path + "/bb3_deinterlaced.log", output_path + "/LocCam", "/camera_bb3.center_frame", "LocCam_#TIME_C")
+    t21 = DelogThread(delogCamera, output_path + "/bb3_deinterlaced.log", output_path + "/LocCam", "/camera_bb3.center_frame", "LocCam_#TIME_C")
     t21.start()
 
-    t22 = DelogThread(delogCamera, input_path + "/bb3_deinterlaced.log", output_path + "/LocCam", "/camera_bb3.right_frame", "LocCam_#TIME_R")
+    t22 = DelogThread(delogCamera, output_path + "/bb3_deinterlaced.log", output_path + "/LocCam", "/camera_bb3.right_frame", "LocCam_#TIME_R")
     t22.start()
 
     t18.join()
@@ -470,5 +470,14 @@ def delogAll(input_path, output_path):
 
 if __name__ == "__main__":
     # Delog all dataset, must provide absolute paths
-    delogAll("/home/marta/20170509-1524", "/media/marta/HDPR/20170509-1524")
+    if len(sys.argv) == 3:
+        script, input_path, output_path = sys.argv
+    else:
+        print("Enter input and output paths as arguments")
+        exit()
+        
+    input_path = os.path.abspath(input_path)
+    output_path = os.path.abspath(output_path)
+    
+    delogAll(input_path, output_path)
 
