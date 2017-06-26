@@ -30,7 +30,8 @@ readings = []
 with open(filename) as f:
     for line in f:
         # Regular expression for the parser
-        regex = re.match('^(\d+)\s([-\d\.]+)\s([-\d\.]+)\s([-\d\.]+)\s(?:nan\s){9}([-\d\.]+)\s([-\d\.]+)\s([-\d\.]+)\s([-\d\.]+)', line, re.IGNORECASE)
+        #regex = re.match('^(\d+)\s([-\d\.]+)\s([-\d\.]+)\s([-\d\.]+)\s(?:nan\s){9}([-\d\.]+)\s([-\d\.]+)\s([-\d\.]+)\s([-\d\.]+)', line, re.IGNORECASE)
+        regex = re.match('^(\d+)\s(?:\d{2,3}\s){12}([-\d\.]+)\s([-\d\.]+)\s([-\d\.]+)\s(?:nan\s){9}([-\d\.]+)\s([-\d\.]+)\s([-\d\.]+)\s([-\d\.]+)', line, re.IGNORECASE)
         if regex:
             values = []
             for m in regex.groups():
