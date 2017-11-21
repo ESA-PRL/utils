@@ -1,0 +1,15 @@
+# This is a collection of handy (tab completion) aliases for commonly used actions in ROCK.
+# Source this file from your bashrc/zshrc (source utils/.bash_rock_aliases).
+
+# When the Corba Name Server throws an error such as
+#    name_service.rb:648:in `do_validate': communication failed with corba naming service  (Orocos::CORBA::ComError)
+# the nameserver needs to be restarted:
+alias rockRestartCorbaNameServer='sudo /etc/init.d/omniorb4-nameserver restart'
+
+# If the above is not enough, you may need to delete log files in the omniorb directory in var
+alias rockClearOmniorbExoter='sudo rm /var/lib/omniorb/omninames-exoter.*'
+alias rockClearOmniorbHDPR='sudo rm /var/lib/omniorb/omninames-HDPR.*'
+alias rockKillHdprProcesses="ps | grep hdpr | awk '{print $1}' | xargs kill"
+
+# Source the correct ROCK env
+alias rockSelRockMaster='source ~/rock_master/env.sh'
