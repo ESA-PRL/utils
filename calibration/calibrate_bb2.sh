@@ -15,7 +15,7 @@ function renameFiles {
     done
 }
 
-cd bb2_tof
+cd bb2_calibration
 
 mkdir cam0
 cd cam0
@@ -31,19 +31,12 @@ rock-export ../bb2.log --stream /camera_bb2.right_frame --filename "#TIME.png" >
 cd ..
 renameFiles cam1
 
-mkdir cam2
-cd cam2
-echo "Extracting TOF"
-rock-export ../tof.log --stream /tofcamera_mesasr.ir_frame --filename "#TIME.png" > /dev/null 2>&1
-cd ..
-renameFiles cam2
-
 echo "Image extraction done"
 
 echo "Generating bag file"
 
-kalibr_bagcreater --folder . --output-bag kalibr_bb2_tof.bag
+kalibr_bagcreater --folder . --output-bag kalibr_bb2.bag
 
 echo "Calibrating cameras using the bag file"
 
-kalibr_calibrate_cameras --bag kalibr_bb2_tof.bag --topics /cam0/image_raw /cam1/image_raw /cam2/image_raw --models pinhole-radtan pinhole-radtan pinhole-radtan --target ./aprilgrid_target_3x3.yaml
+kalibr_calibrate_cameras --bag kalibr_bb2.bag --topics /cam0/image_raw /cam1/image_raw --models pinhole-radtan pinhole-radtan --target ../aprilgrid_target_3x3.yaml

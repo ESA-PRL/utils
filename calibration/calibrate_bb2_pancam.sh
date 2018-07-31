@@ -15,19 +15,19 @@ function renameFiles {
     done
 }
 
-cd bb3_pancam
+cd bb2_bb3_pancam
 
 mkdir cam0
 cd cam0
-echo "Extracting BB3 left"
-rock-export ../bb3.log --stream /camera_bb3.left_frame --filename "#TIME.png" > /dev/null 2>&1
+echo "Extracting BB2 left"
+rock-export ../bb2.log --stream /camera_bb2.left_frame --filename "#TIME.png" > /dev/null 2>&1
 cd ..
 renameFiles cam0
 
 mkdir cam1
 cd cam1
-echo "Extracting BB3 right"
-rock-export ../bb3.log --stream /camera_bb3.right_frame --filename "#TIME.png" > /dev/null 2>&1
+echo "Extracting BB2 right"
+rock-export ../bb2.log --stream /camera_bb2.right_frame --filename "#TIME.png" > /dev/null 2>&1
 cd ..
 renameFiles cam1
 
@@ -49,9 +49,11 @@ echo "Image extraction done"
 
 echo "Generating bag file"
 
-kalibr_bagcreater --folder . --output-bag bb3_pancam.bag
+kalibr_bagcreater --folder . --output-bag bb2_pancam.bag
 
 echo "Calibrating cameras using the bag file"
 
-kalibr_calibrate_cameras --bag bb3_pancam.bag --topics /cam0/image_raw /cam1/image_raw /cam2/image_raw /cam3/image_raw --models pinhole-radtan pinhole-radtan pinhole-radtan pinhole-radtan --target ../aprilgrid_target_6x6.yaml
+kalibr_calibrate_cameras --bag bb2_pancam.bag --topics /cam0/image_raw /cam1/image_raw /cam2/image_raw /cam3/image_raw --models pinhole-radtan pinhole-radtan pinhole-radtan pinhole-radtan --target ./aprilgrid_target_6x6.yaml
+
+
 
