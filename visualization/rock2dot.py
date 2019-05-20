@@ -1,4 +1,8 @@
 #! /usr/bin/env python
+#
+# This script is taken and adapted from
+# https://github.com/m0rsch1/rock2dot
+
 import sys
 
 infile, outfile = sys.argv[1], sys.argv[2]
