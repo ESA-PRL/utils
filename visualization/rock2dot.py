@@ -1,7 +1,9 @@
 #! /usr/bin/env python
 #
-# This script is taken and adapted from
-# https://github.com/m0rsch1/rock2dot
+# Authors:
+# Moritz Schilling
+# Max Ehrhardt
+# Levin Gerdes
 
 import sys
 
