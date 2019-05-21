@@ -16,6 +16,9 @@ Other image formats like png are possible as well. For this check the documentat
 https://www.graphviz.org/doc/info/output.html
 
 Authors:
+
 Moritz Schilling, DFKI
+
 Max Ehrhardt, ESA
+
 Levin Gerdes, ESA
