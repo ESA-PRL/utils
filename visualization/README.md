@@ -1,4 +1,14 @@
-# rock2dot
+# Visualization
+Folder containing scripts for visualization purposes, i.e. for graphically representing
+data collected during experiments, software diagrams, etc.
+
+## comptime_visualizer
+This script plots computational time samples collected during experimental tests.
+
+Authors:
+ - [J. Ricardo Sánchez Ibáñez](https://github.com/Ryk-San) (University of Málaga - ricardosan@uma.es)
+
+## rock2dot
 
 Script to create a dot graph of the connections defined in a rock ruby file.
 
@@ -17,8 +27,8 @@ https://www.graphviz.org/doc/info/output.html
 
 Authors:
 
-Moritz Schilling, DFKI
+ - [Moritz Schilling](https://github.com/m0rsch1), DFKI
 
-Max Ehrhardt, ESA
+ - [Max Ehrhardt](https://github.com/maxehrhardt), ESA
 
-Levin Gerdes, ESA
+ - [Levin Gerdes](https://github.com/levingerdes), ESA
