@@ -43,6 +43,7 @@ for i,t in enumerate(times_list):
     ax.bar(ind, t)
     ax.set_xticks(ind)
     ax.set_ylabel('Computational Time (ms)')
+    ax.set_xlabel('Sorted Samples')
 
 # The final plot shows the mean and standard deviation of each array, together 
 # with the mean and standard deviation of the whole set of data
